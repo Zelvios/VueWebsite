@@ -3,59 +3,40 @@
   <div class="home" id="home-section">
     <div class="content" :class="{ 'show-content': showContent }">
       <div class="image-text-container">
-        <div class="image">
-          <img :src="imagePath" alt="Portfolio Image">
+        <div class="socials">
+          <a href="https://github.com/Zelvios" target=”_blank”><i class="ri-github-fill"></i></a>
+          <a href="https://www.linkedin.com/in/jacob-j%C3%B8rgensen-851430261/" target=”_blank”><i class="ri-linkedin-box-fill"></i></a>
+        </div>
+          <div class="image">
+            <article class="ps-container">
+              <section class="ps-photoset">
+                <img class="ps-photo" src="/eatmore.jpg" alt="Photo 1">
+                <img class="ps-photo" src="/eatmore.jpg" alt="Photo 2">
+                <img class="ps-photo" src="/eatmore.jpg" alt="Photo 3">
+              </section>
+            </article>
         </div>
         <div class="text-section">
           <div class="title-container">
             <h2 class="title"><span class="highlight">Jacob's</span> Showcase:</h2>
-            <h2 class="sub-title">A Creative Journey</h2>
+            <h2 class="sub-title" ref="subTitle">A Creative Journey</h2>
           </div>
           <p class="typing-demo">Hello, I'm Jacob, presenting my carefully curated coding portfolio.</p>
-          <h3 class="hovercard-text">Please feel welcome to hover over the <span class="highlight">card</span> below to access my social media profiles.</h3>
           <button @click="scrollToProjects" style="--clr:#ffa751"><span>Explore</span><i></i></button>
         </div>
       </div>
-      <div class="frame">
-	<div class="card">
-		<div class="flip hvr-outline-in">
-			
-			<div class="front">
-				<h1>Jacob</h1>
-				<div class="line line-1"></div>
-				<div class="line line-2"></div>
-				<i class="fa fa-heart"></i>
-			</div>
-			
-			<div class="back">
-				<i class="fa fa-heart"></i>
-				<h3>Jacob</h3>
-				<div class="line line-3"></div>
-				<h2>Programmer</h2>
-				<div class="social">
-          <a class="no-style" href="https://www.linkedin.com/in/jacob-j%C3%B8rgensen-851430261/">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-					<a class="no-style" href="https://github.com/Zelvios">
-            <i class="fab fa-github"></i>
-          </a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
     </div>
   </div>
 </template>
 
-
 <script>
+import $ from 'jquery';
 export default {
   data() {
     return {
       imagePath: 'c-sharp.png',
-      showContent: false // Initially set to false to hide the content
+      showContent: false,
+      bReady: false
     }
   },
   methods: {
@@ -75,20 +56,151 @@ export default {
     setTimeout(() => {
       this.showContent = true;
     }, 500);
+
+    // This pauses the re-stacking until the expand animation is finished
+    $(".ps-photoset").hover(() => {
+      this.bReady = false;
+      setTimeout(() => {
+        this.bReady = true;
+      }, 700);
+    });
   }
 }
 </script>
 
+
+
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Nunito|Satisfy');
-.no-style {
-  text-decoration: none;
-  color: inherit;
+@import url("https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css");
+
+/* Images */
+
+.image-text-container {
+  justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.image {
+  justify-content: right;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
+.ps-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 70vw;
+  height: 70vh;
+}
+
+.ps-photoset {
+  width: 60%;
+  max-width: 400px;
+  position: relative;
+  margin: -80px auto 0;
+  aspect-ratio: 7 / 5;
+}
+
+.ps-photoset:hover .ps-photo {
+  transform: rotate(0deg);
+}
+
+.ps-photoset:hover .ps-photo:nth-child(1) {
+  left: -2vw;
+  top: 15vw;
+}
+
+.ps-photoset:hover .ps-photo:nth-child(2) {
+  left: 20vw;
+  top: 5vw;
+}
+
+.ps-photoset:hover .ps-photo:nth-child(3) {
+  left: 5vw;
+  top: -10vw;
+}
+
+.ps-photo {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 60%;
+  border-radius: 1.5vw;
+  box-shadow: 3px 4px rgba(0,0,0,0.1);
+  transition: 500ms all ease;
+}
+
+.ps-photo:nth-child(1) {
+  transform: rotate(4deg);
+}
+
+.ps-photo:nth-child(2) {
+  transform: rotate(3deg);
+}
+
+.ps-photo:nth-child(3) {
+  transform: rotate(-3deg);
+}
+
+.ps-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 100vw;
+  user-select: none;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.67);
+  border-radius: 1px;
+}
+
+.ps-controls .block {
+  margin: 10px;
+  display: inline-block;
+}
+
+.ps-controls .option-label {
+  padding: 12px 10px 10px 0;
+}
+
+.ps-controls .option-label:hover {
+  cursor: pointer;
+}
+
+/* Socials */
+.socials {
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px; 
+  margin-left: 0; 
+}
+
+.socials a {
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.socials i {
+  font-size: 60px;
+  color: #fff;
+  transition: all .50s ease;
+}
+
+.socials i:hover {
+  color: #ffa751;
+  transform: translateY(-5px);
+}
+
+
+/* Text */
 .content {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
 }
 
 .show-content {
@@ -100,7 +212,7 @@ export default {
 }
 .home {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   height: 100vh;
   text-align: center;
@@ -111,58 +223,53 @@ export default {
   width: 100%;
 }
 
-.image-text-container {
-  display: flex;
-  align-items: center;
-}
-
-.image {
-  flex: 0 0 30%;
-  margin-right: 30px; 
-}
-
-.image img {
-  max-width: 100%; 
-  height: auto;
-}
-
 .text-section {
   flex: 1;
-  text-align: left; 
+  text-align: left;
+  max-width: calc(100% - 200px); 
+  margin-right: 20px; 
+  margin-left: 20px; 
 }
 
 .text-section .title {
-  margin-bottom: 1px; 
+  margin-bottom: 1px;
   margin-top: 0;
-  font-size: 2.5em; 
+  font-size: 3.0em;
+  overflow-wrap: break-word;
 }
 
 .text-section .sub-title {
-  margin-bottom: 25px; 
+  margin-bottom: 30px;
   margin-top: 0;
-  margin-left: 25px;
-  font-size: 2.0em;
+  margin-left: 0;
+  font-size: 2.5em;
+  overflow-wrap: break-word;
 }
 
 .text-section p {
-  margin-top: 2px; 
-  font-size: 1.2em;
+  font-size: 1.3em;
+  margin-bottom: 35px;
+  overflow-wrap: break-word;
 }
 
+
+/* Button */
 button {
   position: relative;
   background: #444;
+  z-index: 999;
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
   border: none;
   letter-spacing: 0.1rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 1rem 3rem;
   transition: 0.2s;
 }
 
 button:hover {
+  cursor: pointer;
   letter-spacing: 0.2rem;
   padding: 1.1rem 3.1rem;
   background: var(--clr);
@@ -179,7 +286,7 @@ button::before {
 
 button span {
   position: relative;
-  z-index: 1;
+  z-index: 9;
 }
 button i {
   position: absolute;
@@ -274,208 +381,5 @@ button:hover i::after {
   50% {
     border-color: transparent
   }
-}
-.frame {
-  position: absolute;
-  background-color: transparent;
-  top: 90%;
-  left: 50%;
-  width: 600px;
-  height: 400px;
-  border-radius: 2px;
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transform: translate(-50%, -50%);
-}
-
-.frame,
-.card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card {
-  width: 80%;
-  height: 40%;
-  padding: 1rem;
-  background: linear-gradient(178deg, #FF4848, #f0f328, #f0f328, #FF4848);
-  background-size: 600% 600%;
-  animation: background 7s ease infinite;
-  perspective: 800px;
-}
-
-.front h1 {
-  font-family: Satisfy, cursive;
-  font-size: 8rem;
-  margin: 1rem 5rem;
-  text-shadow: .2rem .2rem .5rem fade-out(black, .8);
-}
-
-h1,
-h2,
-.fa-heart {
-  background: linear-gradient(178deg, #FF4848, #f0f328, #f0f328, #FF4848);
-  background-size: 600% 600%;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: background 7s ease infinite;
-}
-
-@keyframes background {
-  0%, 100% {
-    background-position: 0% 13%;
-  }
-
-  50% {
-    background-position: 100% 88%;
-  }
-}
-
-.frame p {
-  position: absolute;
-  top: 60%;
-  left: 15%;
-  color: fade-out(white, .8);
-  padding: .8rem 0 .2rem .5rem;
-}
-
-p:nth-of-type(2) {
-  opacity: 0;
-  transform: translate(-2rem);
-}
-
-.line {
-  width: 2rem;
-  height: 2px;
-  background: fade-out(#fff, .6);
-  position: absolute;
-}
-
-.line-1 {
-  top: 85%;
-}
-
-.line-2 {
-  top: 13%;
-}
-
-.line-1,
-.line-2 {
-  left: 82.5%;
-  transform: rotate(-90deg);
-  background: #f0f328;
-  width: 3rem;
-}
-
-.line-3 {
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.social {
-  font-size: 1.3rem;
-  color: fade-out(#fff, .6);
-}
-
-.social i {
-  padding: 0 .5rem;
-}
-
-.social i:hover {
-  color: fade-out(#fff, .3);
-  cursor: pointer;
-}
-
-.hvr-outline-in {
-  position: relative;
-}
-
-.hvr-outline-in:before {
-  content: '';
-  position: absolute;
-  border: 1px solid #f0f328;
-  top: -16px;
-  right: -16px;
-  bottom: -16px;
-  left: -16px;
-  opacity: 0;
-}
-
-.hvr-outline-in:hover:before,
-.hvr-outline-in:focus:before,
-.hvr-outline-in:active:before {
-  top: -8px;
-  right: -8px;
-  bottom: -8px;
-  left: -8px;
-  opacity: 1;
-  transform: rotate(135deg) scale(3);
-  transition: .3s;
-}
-
-.card:hover .flip {
-  transform: rotateX(180deg) translate3d(0, 0, 0);
-  box-shadow: 8px -10px 15px 0 rgba(0, 0, 0, 0.5);
-}
-
-.flip {
-  transform-style: preserve-3d;
-  transition: all .7s ease-in-out;
-  perspective: 1000px;
-}
-
-.front,
-.back {
-  backface-visibility: hidden;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  background: #201c29;
-}
-
-.card .back {
-  transform: rotateX(-180deg);
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.back {
-  letter-spacing: 2px;
-  text-align: center;
-}
-
-.back h2 {
-  font-size: 2.3rem;
-  margin: .5rem;
-}
-
-.back h3 {
-  color: fade-out(#fff, .3);
-  font-family: satisfy, cursive;
-  font-weight: 300;
-  font-size: 1.9rem;
-  margin: 1.8rem;
-}
-
-.front i,
-.back .fa-heart {
-  position: absolute;
-  font-size: 2rem;
-}
-
-.front i {
-  bottom: 0;
-  left: 0;
-  transform: rotate(45deg);
-}
-
-.back .fa-heart {
-  top: 0;
-  left: 0;
-  transform: rotate(135deg);
 }
 </style>

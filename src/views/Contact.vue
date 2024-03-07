@@ -81,6 +81,7 @@ body {
 }
 
 .card:hover {
+  cursor: default;
   transform: translateY(-10px);
 }
 
