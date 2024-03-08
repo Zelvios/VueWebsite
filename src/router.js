@@ -4,9 +4,9 @@ import Projects from './views/Projects.vue';
 import Contact from './views/Contact.vue';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/projects', component: Projects },
-  { path: '/contact', component: Contact }
+  { path: '/', component: Home, meta: { title: 'Portfolio' } },
+  { path: '/projects', component: Projects, meta: { title: 'Portfolio - Projects' } },
+  { path: '/contact', component: Contact, meta: { title: 'Portfolio - Contact' } }
 ];
 
 const router = createRouter({
@@ -15,10 +15,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // Check if the route corresponds to a section with an ID
-  if (document.getElementById(to.path.slice(1))) {
-    window.scrollTo(0, 0); // Scroll to top if the route corresponds to a section with an ID
-  }
+  document.title = to.meta.title || 'Portfolio'; // Set the title dynamically based on the route meta information
   next();
 });
 

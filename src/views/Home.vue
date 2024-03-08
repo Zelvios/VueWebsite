@@ -177,7 +177,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-right: 10px; 
-  margin-left: 0; 
+  margin-left: 150px; 
 }
 
 .socials a {
@@ -227,7 +227,7 @@ export default {
   flex: 1;
   text-align: left;
   max-width: calc(100% - 200px); 
-  margin-right: 20px; 
+  margin-right: 0px; 
   margin-left: 20px; 
 }
 
@@ -380,6 +380,83 @@ button:hover i::after {
 @keyframes blink {
   50% {
     border-color: transparent
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .image-text-container {
+    margin-top: 20%;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .socials {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; 
+    margin: 0 auto; 
+    transform: translateY(-100%);
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+  }
+
+  .socials a {
+    margin: 0 10px; 
+  }
+
+  .text-section {
+    margin-top: 20px; 
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .text-section .title {
+    font-size: 2.5em; 
+  }
+
+  .text-section .sub-title {
+    font-size: 2em; 
+  }
+
+  .typing-demo {
+    font-size: 1.5em; 
+    width: auto; 
+    margin: 0 auto; 
+  }
+
+  .image {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-top: 20px;
+  }
+
+  .ps-photo {
+  width: 100%;
+  max-width: 70%;
+  position: absolute;
+  top: 10%;
+  left: 20%; 
+  transform: translateX(-50%); 
+  border-radius: 1.5vw;
+  box-shadow: 3px 4px rgba(0,0,0,0.1);
+  transition: 500ms all ease;
+}
+
+  .ps-container {
+    width: 90vw;
+    max-width: 90vw;
+    height: auto; 
+  }
+
+  .ps-photoset {
+    width: 100%; 
+    max-width: none; 
+    margin: 0 auto;
   }
 }
 </style>

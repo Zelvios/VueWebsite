@@ -1,6 +1,8 @@
 <template>
   <div class="contact" id="contact-section">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <h1 class="title">Socials</h1>
+      <p class="underTitle"><spam class="highlight">Hover</spam> over the <spam class="highlight">card</spam> to reveal its corresponding information.</p>
     <div class="content">
      <!-- card -->
       <div class="card" v-for="(card, index) in cards" :key="index">
@@ -10,8 +12,8 @@
         <div class="icon" v-else>
           <i class="material-icons md-36">{{ card.icon }}</i>
         </div>
-        <p class="title">{{ card.title }}</p>
-        <p class="text">{{ card.text }}</p>
+        <p class="cardtitle">{{ card.title }}</p>
+        <p class="cardtext">{{ card.text }}</p>
       </div>
       <!-- end card -->
     </div>
@@ -23,7 +25,7 @@ export default {
   data() {
     return {
       cards: [
-        { icon: 'article', title: '? Resume ?', text: 'Ready to Propel Your Team Forward? Contact Me for Resume Access.' },
+        { icon: 'article', title: 'Resume', text: 'Ready to Propel Your Team Forward? Contact Me for Resume Access.' },
         { icon: 'face', title: 'About me', text: "As an eager learner and programmer, I'm dedicated to expanding my coding expertise and always excited to delve into new realms of knowledge." },
         { icon: 'email', title: 'Contact', text: 'Mail: Jaco296c@outlook.dk' }
       ]
@@ -33,6 +35,31 @@ export default {
 </script>
 
 <style scoped>
+
+/* Title */
+.highlight {
+  color: #ffa751;
+}
+
+.title {
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto; 
+  font-size: 2.5em;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.underTitle {
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto; 
+  font-size: 1.5em;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
 body {
   width: 100vw;
   background-color: #1D1D1D;
@@ -44,16 +71,21 @@ body {
   max-width: 1024px;
   width: 100%;
   padding: 0 4%;
-  padding-top: 250px;
+  padding-top: 20px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1024px) {
+  .title {
+    margin-top: 20%;
+  }
   .content {
-    padding-top: 300px;
+    padding-top: 5%;
+    padding-right: 0;
+    padding-left: 0;
     flex-direction: column;
   }
 }
@@ -64,8 +96,7 @@ body {
   min-width: 20px;
   height: 330px;
   background-color: #292929;
-  margin: 10px;
-  margin-bottom: 100px;
+  margin: 2%;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
   border: 2px solid rgba(7, 7, 7, 0.12);
@@ -85,7 +116,7 @@ body {
   transform: translateY(-10px);
 }
 
-.card .title {
+.card .cardtitle {
   width: 100%;
   margin: 0;
   text-align: center;
@@ -96,7 +127,7 @@ body {
   letter-spacing: 4px;
 }
 
-.card .text {
+.card .cardtext {
   width: 80%;
   margin: 0 auto;
   font-size: 13px;
@@ -110,7 +141,7 @@ body {
   transition: all 0.3s ease;
 }
 
-.card:hover .text {
+.card:hover .cardtext {
   opacity: 1;
   max-height: 40px;
 }

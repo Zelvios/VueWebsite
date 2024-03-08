@@ -3,11 +3,11 @@
   <section class="dark">
     <div class="container py-4">
       <h1 class="title">Projects</h1>
+      <p class="underTitle">Here are several of my projects. </p>
+      <p class="underTitle">Please feel free to click on their <spam class="highlight">titles</spam> or <spam class="highlight">GitHub</spam> links to access their <spam class="highlight">repositories</spam>.</p>
 
-      <!-- Search input field -->
-      <div class="search-container">
-        <input type="text" placeholder="Search..." v-model="searchQuery" class="search-input">
-        <div class="search"></div>
+      <!-- swap color -->
+      <div>
       </div>
 
       <article v-for="(project, index) in filteredProjects" :key="index" :class="[getPostcardClass(index), project.color]">
@@ -20,7 +20,7 @@
           </template>
         </a>
         <div class="postcard__text">
-          <h1 :class="titleClass[index]"><a :href="project.link">{{ project.title }}</a></h1>
+          <h1 :class="titleClass[index]"><a :href="project.github" target="_blank">{{ project.title }}</a></h1>
           <div class="postcard__subtitle small">
             <time :datetime="project.date">
               <i class="fas fa-calendar-alt mr-2"></i> {{ project.date }}
@@ -62,9 +62,10 @@ export default {
         { id: 1, title: "EatMore", description: "I crafted a project highlighting expertise in WPF, database management, and file handling.",
           date: "Nov 3, 2022", category: "C#, WPF", time: "?",
           imgUrl: "/eatmore.jpg", github: "https://github.com/Zelvios/EatMore"},
+
         { id: 2, title: "Vue Movies - API",  description: "Engineered a C# console app to gather data from two APIs and store it locally as a JSON file. Created a Vue.js site with a custom API to access and display the stored data efficiently.", 
           date: "???? ???", category: "C#, VUE, JSON, API",
-          imgUrl: "", github: "https://github.com/Zelvios"},
+          imgUrl: "/eatmore.jpg", github: "https://github.com/Zelvios"},
       ];
       
       this.projects = projectsData;
@@ -94,9 +95,13 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
 
+
 /* Title */
+.highlight {
+  color: #ffa751;
+}
+
 .title {
-  margin-bottom: 30px;
   margin-top: 0;
   margin-left: auto;
   margin-right: auto; 
@@ -105,129 +110,14 @@ export default {
   text-align: center;
 }
 
-
-/* SEARCH */
-.search-container {
-  z-index: 999;
-  position: fixed;
-  top: 10%;
-  right: 10%;
-}
-
-.search {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 80px;
-  height: 80px;
-  background: crimson;
-  border-radius: 50%;
-  transition: all 1s;
-  z-index: 4;
-  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
-}
-
-.search:hover {
-  cursor: pointer;
-}
-
-.search::before {
-  content: "";
-  position: absolute;
-  margin: auto;
-  top: 22px;
-  right: 0;
-  bottom: 0;
-  left: 22px;
-  width: 12px;
-  height: 2px;
-  background: white;
-  transform: rotate(45deg);
-  transition: all .5s;
-}
-
-.search::after {
-  content: "";
-  position: absolute;
-  margin: auto;
-  top: -5px;
-  right: 0;
-  bottom: 0;
-  left: -5px;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 2px solid white;
-  transition: all .5s;
-}
-
-.search-container input {
-  font-family: 'Inconsolata', monospace;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 50px;
-  outline: none;
-  border: none;
-  background: crimson;
-  color: white;
-  text-shadow: 0 0 10px crimson;
-  padding: 0 80px 0 20px;
-  border-radius: 30px;
-  box-shadow: 0 0 25px 0 crimson,
-              0 20px 25px 0 rgba(0, 0, 0, 0.2);
-  transition: all 1s;
-  opacity: 0;
-  z-index: 5;
-  font-weight: bolder;
-  letter-spacing: 0.1em;
-}
-
-.search-container input:hover {
-  cursor: pointer;
-}
-
-.search-container input:focus {
-  width: 300px;
-  opacity: 1;
-  cursor: text;
-  left: calc(100% - 250px);
-}
-
-.search-container input:focus ~ .search {
-  right: -250px;
-  background: #151515;
-  z-index: 6;
-}
-
-.search-container input:focus ~ .search::before {
-  top: 0;
-  left: 0;
-  width: 25px;
-}
-
-.search-container input:focus ~ .search::after {
-  top: 0;
-  left: 0;
-  width: 25px;
-  height: 2px;
-  border: none;
-  background: white;
-  border-radius: 0%;
-  transform: rotate(-45deg);
-}
-
-.search-container input::placeholder {
-  color: white;
-  opacity: 0.5;
-  font-weight: bolder;
+.underTitle {
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto; 
+  font-size: 1.5em;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
 
@@ -277,12 +167,10 @@ a, a:hover {
   display: flex;
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
-  margin: 2rem auto;
+  margin: 2rem 0rem 2rem 0rem;
   overflow: hidden;
   position: relative;
   color: #ffffff;
-  height: 350px;
-  width: 1400px;
 
   &.dark {
     background-color: #18151f;
@@ -290,21 +178,21 @@ a, a:hover {
   &.light {
     background-color: #e1e5ea;
   }
-
+  
   .t-dark {
     color: #18151f;
   }
-
+  
   a {
     color: inherit;
   }
-
-  h1,  .h1 {
+  
+  h1, .h1 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
   }
-
+  
   .small {
     font-size: 80%;
   }
@@ -314,10 +202,11 @@ a, a:hover {
   }
 
   .postcard__img {
-    max-height: 150px;
+    max-height: 180px;
     width: 100%;
     object-fit: cover;
     position: relative;
+    margin: 0;
   }
 
   .postcard__img_link {
@@ -325,8 +214,8 @@ a, a:hover {
   }
 
   .postcard__bar {
-    width: 100px;
-    height: 5px;
+    width: 50px;
+    height: 10px;
     margin: 10px 0;
     border-radius: 5px;
     background-color: #424242;
@@ -334,18 +223,17 @@ a, a:hover {
   }
 
   .postcard__text {
-    padding: 1rem;
+    padding: 1.5rem;
     position: relative;
     display: flex;
     flex-direction: column;
-    height: auto;
   }
 
   .postcard__preview-txt {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: justify;
-    height: 50px;
+    height: 100%;
   }
 
   .postcard__tagbox {
@@ -355,7 +243,6 @@ a, a:hover {
     margin: 20px 0 0 0;
     padding: 0;
     justify-content: center;
-    margin-top: auto;
 
     .tag__item {
       display: inline-block;
@@ -383,16 +270,17 @@ a, a:hover {
     background-image: linear-gradient(-70deg, #424242, transparent 50%);
     opacity: 1;
     border-radius: 10px;
-    }
+  }
 
   &:hover .postcard__bar {
-    width: 150px;
+    width: 100px;
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1024px) {
   .postcard {
     flex-wrap: inherit;
+    margin: 2rem 10rem 2rem 10rem;
 
     .postcard__title {
       font-size: 2rem;
@@ -403,9 +291,10 @@ a, a:hover {
     }
 
     .postcard__img {
-      max-width: 300px;
+      max-width: 400px;
       max-height: 100%;
       transition: transform 0.3s ease;
+      margin: 0;
     }
 
     .postcard__text {
@@ -446,33 +335,33 @@ a, a:hover {
     }
   }
 }
-@media screen and (min-width: 1024px){
-    .postcard__text {
-      padding: 2rem 3.5rem;
-    }
-      
-    .postcard__text:before {
-      content: "";
-      position: absolute;
-      display: block;
-        
-      top: -20%;
-      height: 130%;
-      width: 55px;
-    }
+
+@media screen and (min-width: 1054px){
+  .postcard__text {
+    padding: 2rem 3.5rem;
+  }
+  
+  .postcard__text:before {
+    content: "";
+    position: absolute;
+    display: block;
     
+    top: -20%;
+    height: 130%;
+    width: 55px;
+  }
+  
   .postcard.dark {
     .postcard__text:before {
       background: #18151f;
     }
   }
-    .postcard.light {
+  .postcard.light {
     .postcard__text:before {
       background: #e1e5ea;
     }
   }
 }
-
 /* COLORS */
 .postcard .tag__item.blue:hover{
   background: #0076bd !important;
@@ -487,9 +376,9 @@ a, a:hover {
 .blue::before {
   background-image: linear-gradient(
     -30deg,
-    rgba(121, 221, 9, 0.1),
+    rgba(0, 60, 255, 0.1),
     transparent 50%
-  );
+  ) !important;
 }
 
 .postcard .tag__item.red:hover  {
@@ -500,14 +389,14 @@ a, a:hover {
   color: #bd150b;
 }
 .red .postcard__bar {
-  background-color: #bd150b;
+  background-color: #bd150b !important;
 }
 .red::before {
   background-image: linear-gradient(
-    -30deg,
-    rgba(121, 221, 9, 0.1),
+    30deg,
+    rgba(187, 16, 16, 0.356),
     transparent 50%
-  );
+  ) !important;
 }
 
 .postcard .tag__item.green:hover {
@@ -523,9 +412,9 @@ color: black !important;
 .green::before {
   background-image: linear-gradient(
     -30deg,
-    rgba(121, 221, 9, 0.1),
+    rgba(136, 255, 0, 0.1),
     transparent 50%
-  );
+  ) !important;
 }
   
 
@@ -542,9 +431,9 @@ color: black !important;
 .yellow::before {
   background-image: linear-gradient(
     -30deg,
-    rgba(121, 221, 9, 0.1),
+    rgba(251, 255, 0, 0.1),
     transparent 50%
-  );
+  ) !important;
 }
   
 
@@ -597,53 +486,33 @@ color: black !important;
     );
   }
 
-  @media screen and (min-width: 769px) {
-    .green::before {
-      background-image: linear-gradient(
-        -80deg,
-        rgba(121, 221, 9, 0.1),
-        transparent 50%
-      );
-    }
-    .green:nth-child(2n)::before {
-      background-image: linear-gradient(
-        80deg,
-        rgba(121, 221, 9, 0.1),
-        transparent 50%
-      );
-    }
-
-    .blue::before {
-      background-image: linear-gradient(
-        -80deg,
-        rgba(0, 118, 189, 0.1),
-        transparent 50%
-      );
-    }
-    .blue:nth-child(2n)::before {
-      background-image: linear-gradient(80deg, rgba(0, 118, 189, 0.1), transparent 50%);
-    }
-
-    .red::before {
-      background-image: linear-gradient(-80deg, rgba(189, 21, 11, 0.1), transparent 50%);
-    }
-    .red:nth-child(2n)::before {
-      background-image: linear-gradient(80deg, rgba(189, 21, 11, 0.1), transparent 50%);
-    }
-    
-    .yellow::before {
-      background-image: linear-gradient(
-        -80deg,
-        rgba(189, 187, 73, 0.1),
-        transparent 50%
-      );
-    }
-    .yellow:nth-child(2n)::before {
-      background-image: linear-gradient(
-        80deg,
-        rgba(189, 187, 73, 0.1),
-        transparent 50%
-      );
-    }
+@media screen and (min-width: 769px) {
+  .green::before {
+    background-image: linear-gradient(-80deg, #79dd09, transparent 50%);
   }
+  .green:nth-child(2n)::before {
+    background-image: linear-gradient(80deg, #79dd09, transparent 50%);
+  }
+
+  .blue::before {
+    background-image: linear-gradient(-80deg, #0076bd, transparent 50%);
+  }
+  .blue:nth-child(2n)::before {
+    background-image: linear-gradient(80deg, #0076bd, transparent 50%);
+  }
+
+  .red::before {
+    background-image: linear-gradient(-80deg, #bd150b, transparent 50%);
+  }
+  .red:nth-child(2n)::before {
+    background-image: linear-gradient(80deg, #bd150b, transparent 50%);
+  }
+  
+  .yellow::before {
+    background-image: linear-gradient(-80deg, #bdbb49, transparent 50%);
+  }
+  .yellow:nth-child(2n)::before {
+    background-image: linear-gradient(80deg, #bdbb49, transparent 50%);
+  }
+}
 </style>
