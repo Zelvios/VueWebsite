@@ -21,7 +21,8 @@
             <h2 class="title"><span class="highlight">Jacob's</span> Showcase:</h2>
             <h2 class="sub-title" ref="subTitle">A Creative Journey</h2>
           </div>
-          <p class="typing-demo">Hello, I'm Jacob, presenting my carefully curated coding portfolio.</p>
+          <p class="typing-demo">Hello, I'm Jacob, </p>
+          <p class="typing-demo2">presenting my carefully curated coding portfolio.</p>
           <button @click="scrollToProjects" style="--clr:#ffa751"><span>Explore</span><i></i></button>
         </div>
       </div>
@@ -354,14 +355,19 @@ button:hover i::after {
   }
 }
 
-.hovercard-text {
-  font-size: 1.3em;
-  font-weight: normal;
-  width: 53ch;
-  overflow-wrap: break-word;
-}
 .typing-demo {
-  width: 52ch;
+  width: 14ch;
+  overflow-wrap: break-word;
+  animation: typing 2s steps(22), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-size: 2em;
+  animation-delay: 1s;
+}
+
+.typing-demo2 {
+  width: 38ch;
   overflow-wrap: break-word;
   animation: typing 2s steps(22), blink .5s step-end infinite alternate;
   white-space: nowrap;
@@ -389,6 +395,29 @@ button:hover i::after {
     flex-direction: column-reverse;
     align-items: center;
   }
+
+  .typing-demo {
+    width: 100%;
+    overflow-wrap: break-word;
+    animation: none;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 0;
+    margin: 0;
+    font-size: 2em;
+  }
+
+.typing-demo2 {
+    width: 100%;
+    overflow-wrap: break-word;
+    animation: none;
+    white-space: wrap;
+    overflow: hidden;
+    border: 0;
+    margin: 0;
+    font-size: 2em;
+  }
+
 
   .socials {
     position: absolute;

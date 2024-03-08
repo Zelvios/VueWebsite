@@ -30,7 +30,6 @@
           <div class="postcard__preview-txt">{{ project.description }}</div>
           <ul class="postcard__tagbox">
             <li class="tag__item"><i class="fas fa-tag mr-2"></i> {{ project.category }}</li>
-            <li class="tag__item"><i class="fas fa-clock mr-2"></i> {{ project.time }}</li>
             <li class="tag__item" :class="project.color">
               <a :href="project.github" target="_blank"><i class="fas fa-play mr-2"></i> Github</a>
             </li>
@@ -59,13 +58,14 @@ export default {
   methods: {
     fetchProjects() {
       const projectsData = [
-        { id: 1, title: "EatMore", description: "I crafted a project highlighting expertise in WPF, database management, and file handling.",
-          date: "Nov 3, 2022", category: "C#, WPF", time: "?",
-          imgUrl: "/eatmore.jpg", github: "https://github.com/Zelvios/EatMore"},
-
-        { id: 2, title: "Vue Movies - API",  description: "Engineered a C# console app to gather data from two APIs and store it locally as a JSON file. Created a Vue.js site with a custom API to access and display the stored data efficiently.", 
+        { id: 2, title: "MovieScore",  description: "Engineered a C# console app to gather data from two APIs and store it locally as a SQLite file. Created a Vue.js site with a custom API to access and display the stored data efficiently.", 
           date: "???? ???", category: "C#, VUE, JSON, API",
           imgUrl: "/eatmore.jpg", github: "https://github.com/Zelvios"},
+
+        { id: 1, title: "EatMore", description: "I crafted a project highlighting expertise in WPF, database management, and file handling.",
+          date: "Nov 3, 2022", category: "C#, WPF",
+          imgUrl: "/eatmore.jpg", github: "https://github.com/Zelvios/EatMore"},
+
       ];
       
       this.projects = projectsData;
